@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "RYWindow.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // 1.设置当前窗口位自定义窗口
+    self.window = [[RYWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    // 2.使用UIStoryboard获取主Storyboard
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    // 3.取出Storyboard的控制器
+    ViewController *viewController = [storyboard instantiateInitialViewController];
+    
+    // 4.设置主窗口的跟控制器
+    self.window.rootViewController = viewController;
+    
+    // 5.显示窗口
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
